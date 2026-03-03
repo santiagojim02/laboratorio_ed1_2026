@@ -5,6 +5,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import modelo.Plato;
@@ -12,7 +13,6 @@ import modelo.Plato;
 public class PlatoDAO {
 
     private final String archivo = "data/Platos.txt";
-
 
     public void guardarPlato(Plato plato) {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(archivo, true))) {
@@ -26,6 +26,11 @@ public class PlatoDAO {
     public List<Plato> cargarPlatos() {
 
         List<Plato> lista = new ArrayList<>();
+
+        File file = new File(archivo);
+        if (!file.exists()) {
+            return lista;
+        }
 
         try (BufferedReader br = new BufferedReader(new FileReader(archivo))) {
 
@@ -66,4 +71,74 @@ public class PlatoDAO {
         return null;
     }
 
+    public int generarNuevoId() {
+
+        List<Plato> lista = cargarPlatos();
+
+        if (lista.isEmpty()) {
+            return 1;
+        }
+
+        int mayor = lista.get(0).getIdPlato();
+
+        for (Plato p : lista) {
+            if (p.getIdPlato() > mayor) {
+                mayor = p.getIdPlato();
+            }
+        }
+
+        return mayor + 1;
+    }
+    public boolean eliminarPlato(int idEliminar) {
+
+    List<Plato> lista = cargarPlatos();
+    boolean eliminado = false;
+
+    for (int i = 0; i < lista.size(); i++) {
+        if (lista.get(i).getIdPlato() == idEliminar) {
+            lista.remove(i);
+            eliminado = true;
+            break;
+        }
+    }
+
+    if (eliminado) {
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(archivo))) {
+            for (Plato p : lista) {
+                bw.write(p.toArchivo());
+                bw.newLine();
+            }
+        } catch (IOException e) {
+            System.out.println("Error al reescribir el archivo.");
+        }
+    }
+
+    return eliminado;
+}
+public boolean actualizarPlato(Plato platoActualizado) {
+
+    List<Plato> lista = cargarPlatos();
+    boolean actualizado = false;
+
+    for (int i = 0; i < lista.size(); i++) {
+        if (lista.get(i).getIdPlato() == platoActualizado.getIdPlato()) {
+            lista.set(i, platoActualizado);
+            actualizado = true;
+            break;
+        }
+    }
+
+    if (actualizado) {
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(archivo))) {
+            for (Plato p : lista) {
+                bw.write(p.toArchivo());
+                bw.newLine();
+            }
+        } catch (IOException e) {
+            System.out.println("Error al reescribir el archivo.");
+        }
+    }
+
+    return actualizado;
+}
 }
