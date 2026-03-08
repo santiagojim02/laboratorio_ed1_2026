@@ -1,0 +1,5 @@
+1;Hamburguesa;12000
+2;Pizza;18000
+3;Pasta;15000
+4;Ensalada;9000
+5;Sushi;22000
