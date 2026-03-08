@@ -56,5 +56,6 @@ public class Plato {
                "\nCategoría: " + categoria +
                "\nPrecio: " + precio +
                "\nDisponible: " + disponible;
+               // dia 3 marzo 2026
     }
 }
