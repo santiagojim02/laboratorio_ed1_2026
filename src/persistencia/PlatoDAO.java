@@ -19,7 +19,7 @@ public class PlatoDAO {
             bw.write(plato.toArchivo());
             bw.newLine();
         } catch (IOException e) {
-            System.out.println("Error al guardar el plato.");
+        e.printStackTrace();
         }
     }
 

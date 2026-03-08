@@ -98,5 +98,12 @@ public class ConsolaUI {
 
     }
 
+    public static void main(String[] args) {
+
+    ConsolaUI ui = new ConsolaUI();
+    ui.iniciar();
+
+}
+
 }
 
