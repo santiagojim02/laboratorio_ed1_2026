@@ -87,14 +87,13 @@ public class VentanaPrincipal extends JFrame {
     }
 
     private void guiTop5() {
-        // Aquí podrías mejorar ReporteService para que devuelva un String en lugar de hacer print
-        reporte.top5Platos(); 
-        JOptionPane.showMessageDialog(this, "El reporte se generó en la consola (puedes revisarlo allí).");
+        String resultado = reporte.top5Platos(); 
+        JOptionPane.showMessageDialog(this, resultado, "Reporte de Ventas", JOptionPane.INFORMATION_MESSAGE);
     }
 
     private void guiPromedio() {
-        reporte.tiempoPromedioEspera();
-        JOptionPane.showMessageDialog(this, "Cálculo realizado. Revisa la consola.");
+        String resultado = reporte.tiempoPromedioEspera();
+        JOptionPane.showMessageDialog(this, resultado, "Estadísticas de Tiempo", JOptionPane.INFORMATION_MESSAGE);
     }
 
     public static void main(String[] args) {

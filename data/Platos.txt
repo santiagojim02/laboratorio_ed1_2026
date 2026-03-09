@@ -3,3 +3,4 @@
 3;Pollo;general;10000.0;activo
 4;Carne;general;20000.0;activo
 5;Chuzo;general;25000.0;activo
+6;Hamburguesa Especial;general;18000.0;activo
